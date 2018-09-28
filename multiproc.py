@@ -10,7 +10,6 @@ class Forever(mp.Process):
     class mpGraceExit(Exception): pass
 
     def __init__(self):
-
         super().__init__()
 
     def handle(self, sig, stack):
@@ -68,7 +67,14 @@ try:
     time.sleep(5)
     myf.start()
     print('Main Started')
-    myf.join()
+    #myf.join()
+    time.sleep(5)
+    print('Terminating')
+    myf.terminate()
+    print('exitcode:', myf.exitcode)
+    time.sleep(2)
+    print('Terminating again')
+    myf.terminate()
 except Exception as e:
     print('Main thread exception. Terminating')
     myf.terminate()
@@ -77,6 +83,3 @@ finally:
     myf.join()
     print('exitcode:', myf.exitcode)
     print('Main Ended')
-
-
-
